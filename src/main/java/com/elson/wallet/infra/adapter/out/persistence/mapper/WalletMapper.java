@@ -1,8 +1,8 @@
-package com.elson.wallet.infrastructure.adapter.out.persistence.mapper;
+package com.elson.wallet.infra.adapter.out.persistence.mapper;
 
 import com.elson.wallet.domain.model.Wallet;
-import com.elson.wallet.infrastructure.adapter.out.persistence.entity.UserEntity;
-import com.elson.wallet.infrastructure.adapter.out.persistence.entity.WalletEntity;
+import com.elson.wallet.infra.adapter.out.persistence.entity.UserEntity;
+import com.elson.wallet.infra.adapter.out.persistence.entity.WalletEntity;
 import org.springframework.stereotype.Component;
 
 /**

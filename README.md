@@ -1,123 +1,83 @@
-# Wallet Service
+# Wallet Service 
 
-## 1. Overview
+## About the project
 
-Wallet Service is a mission-critical microservice designed to manage user funds. It provides a robust, secure, and auditable platform for creating wallets, handling deposits, withdrawals, and transfers between users.
+This is my version of an wallet service. I did this as part of a assessment, the main goal was to make something close to what a production service would look like. 
 
-The entire system is built following **Clean Architecture** principles to ensure high maintainability, testability, and technology independence. A key feature of this service is its **immutable ledger-based data model**, which guarantees full traceability of all operations and allows for querying a wallet's balance at any specific point in the past.
+There's two main non-negociable rules in this project
+1.  **Full Traceability:** Being able to follow the trail of every single single transaction.
+2.  **Historical Balance:** Being able to see the user's balance at any given moment.
 
-For a detailed explanation of the architectural decisions and patterns used, please refer to the [DESIGN_CHOICES.md](./DESIGN_CHOICES.md) file.
+Those rules guided the develepment of the whole application.
 
-## 2. Technology Stack
+---
 
-* **Language:** Java 21 (LTS)
-* **Framework:** Spring Boot 3.3.3
-* **Data Persistence:** Spring Data JPA / Hibernate
-* **Database:** PostgreSQL
-* **Security:** Spring Security 6 / JSON Web Tokens (JWT)
-* **Testing:** JUnit 5, Mockito, AssertJ
-* **High-Fidelity Integration Testing:** Testcontainers
-* **Containerization:** Docker & Docker Compose
-* **Build Tool:** Apache Maven
+## About the architecture
 
-## 3. Prerequisites
+* **The wallet must be very secure and trust worthy.** Every deposit, withdrawal, or transfer is a permanent and immutable record. I made the balance the sum of all of those records. This way everything is auditable and clean.
 
-To run or develop this project, you will need:
+* **Clean Architecture** One of the main goals of the project like was to make something that could go to production, and for this I needed to follow the best practices in developing an API. Following this aproach I made the code easier to test and easier for future changes.
 
-* JDK 21 or higher
-* Apache Maven 3.8+
-* Docker and Docker Compose (for the production-like environment)
+---
 
-## 4. How to Run the Service
+## About the tools 
 
-You have two main options to run the service.
+* Java 21 with Spring Boot
+* PostgreSQL as the database
+* Spring Data JPA and Hibernate
+* Spring Security with JWT 
+* Docker and Docker Compose 
+* JUnit 5, Mockito, AssertJ
 
-### Option 1: Simple Run (In-Memory H2 Database)
+---
 
-This method is ideal for quick development and testing of specific functionalities without needing Docker. It uses an in-memory H2 database that is reset every time the application stops.
+## How to run the project
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <your-repo-url>
-    cd wallet-service
-    ```
+You'll need:
+* Java 21 (JDK)
+* Maven
+* Docker (if you want to use Postgres)
 
-2.  **Run the application using the Maven wrapper:**
+**Option 1: In-Memory DB**
+
+Use this option if you just want to make some calls and test de API. It uses an H2 in-memory database.
+
+1.  Open your terminal.
+2.  `cd wallet-service`
+3.  And run it:
     ```bash
     ./mvnw spring-boot:run
     ```
+   The API will be up at `http://localhost:8080`.
 
-The service will start and be available at `http://localhost:8080`.
+**Option 2: Docker with Postgres**
 
-### Option 2: Production-like Environment (Docker & PostgreSQL)
+Use this option with you want to mimick a real environment.
 
-This is the **recommended** way to run the service as it mirrors a real production setup, using a dedicated PostgreSQL database.
-
-1.  **Ensure Docker Desktop is running.**
-
-2.  **Create a `docker-compose.yml` file** in the root of the project with the following content:
-
-    ```yaml
-    version: '3.8'
-    services:
-      db:
-        image: postgres:16-alpine
-        container_name: wallet-db
-        environment:
-          - POSTGRES_USER=admin
-          - POSTGRES_PASSWORD=admin
-          - POSTGRES_DB=walletdb
-        ports:
-          - "5432:5432"
-        volumes:
-          - postgres_data:/var/lib/postgresql/data
-
-      app:
-        image: wallet-service:latest # This image will be built in the next step
-        container_name: wallet-app
-        depends_on:
-          - db
-        ports:
-          - "8080:8080"
-        environment:
-          - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/walletdb
-          - SPRING_DATASOURCE_USERNAME=admin
-          - SPRING_DATASOURCE_PASSWORD=admin
-          - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    
-    volumes:
-      postgres_data:
-    ```
-
-3.  **Build the application's Docker image** using the built-in Spring Boot plugin. This command creates a highly optimized container image.
+1.  Make sure your Docker is running.
+2.  The `docker-compose.yml` is already in the root. Just build the app's image:
     ```bash
     ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=wallet-service
     ```
-
-4.  **Start all services** using Docker Compose in detached mode.
+3.  And to run everything together:
     ```bash
     docker-compose up -d
     ```
 
-The service will be available at `http://localhost:8080` and will be connected to the PostgreSQL database running inside another container.
+---
 
-* To view the logs: `docker-compose logs -f`
-* To stop all services: `docker-compose down`
+## Testing
 
-## 5. How to Run Tests
+A project that could go to production must have a very high covarage with tests.
 
-The project includes a comprehensive test suite with both unit and integration tests.
+* **Unit Tests:** Made with Mockito, just to make sure that the core rules of the application are working.
+* **Integration Tests:** I used Testcontainers. This means that for the integration tests, the code automatically runs a real and temporary PostgreSQL database in a Docker container.
 
-The integration tests are configured with **Testcontainers**. This means they automatically start a dedicated, ephemeral PostgreSQL database inside a Docker container just for the test run. You **do not need** to have a separate database installed or configured on your machine to run the tests.
+To run all the tests, just run:
+```bash
+./mvnw clean verify
 
-1.  **Execute all tests** using the Maven wrapper. The `verify` command ensures both unit and integration tests are run.
-    ```bash
-    ./mvnw clean verify
-    ```
-
-A test report will be generated in the `target/surefire-reports` directory.
-
-## 6. API Endpoints Overview
+## API Endpoints Overview
 
 All endpoints under `/api/wallets/` are protected and require a `Bearer <JWT>` token in the `Authorization` header.
 
@@ -126,7 +86,7 @@ All endpoints under `/api/wallets/` are protected and require a `Bearer <JWT>` t
 | `POST` | `/api/auth/register`                             | Creates a new user and their associated wallet.|    No     |
 | `POST` | `/api/auth/login`                                | Authenticates a user and returns a JWT.        |    No     |
 | `GET`  | `/api/wallets/me/balance`                        | Retrieves the current balance of your wallet.  |    Yes    |
-| `GET`  | `/api/wallets/me/balance/historical?at_time=...` | Retrieves balance at a specific ISO timestamp. |    Yes    |
+| `GET`  | `/api/wallets/me/balance/historical?at_time=...` | Retrieves balance at a specific timestamp. |    Yes    |
 | `POST` | `/api/wallets/me/deposit`                        | Deposits funds into your wallet.               |    Yes    |
 | `POST` | `/api/wallets/me/withdraw`                       | Withdraws funds from your wallet.              |    Yes    |
 | `POST` | `/api/wallets/me/transfer`                       | Transfers funds from your wallet to another.   |    Yes    |

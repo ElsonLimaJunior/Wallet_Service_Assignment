@@ -7,7 +7,6 @@ public class Wallet {
 
     private final UUID id;
     private final UUID userId;
-    // No 'balance' field! It's a calculated value.
 
     public Wallet(UUID id, UUID userId) {
         this.id = id;

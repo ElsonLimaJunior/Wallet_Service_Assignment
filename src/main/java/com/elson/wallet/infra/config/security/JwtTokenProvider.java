@@ -1,4 +1,4 @@
-package com.elson.wallet.infrastructure.config.security;
+package com.elson.wallet.infra.config.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

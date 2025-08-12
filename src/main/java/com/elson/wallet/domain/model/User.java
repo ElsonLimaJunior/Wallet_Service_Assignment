@@ -6,9 +6,10 @@ import java.util.UUID;
 public class User {
 
     private final UUID id;
+    private Wallet wallet;
     private final String fullName;
     private final String email;
-    private final String password; // This will be the hashed password
+    private final String password; 
 
     public User(UUID id, String fullName, String email, String password) {
         this.id = id;
@@ -31,6 +32,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
     
     @Override

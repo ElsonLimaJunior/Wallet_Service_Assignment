@@ -1,4 +1,4 @@
-package com.elson.wallet.infrastructure.adapter.out.persistence.entity;
+package com.elson.wallet.infra.adapter.out.persistence.entity;
 
 import com.elson.wallet.domain.model.TransactionType; // Podemos referenciar o enum do domínio diretamente
 import jakarta.persistence.Column;

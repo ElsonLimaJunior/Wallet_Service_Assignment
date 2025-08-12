@@ -1,4 +1,4 @@
-package com.elson.wallet.infrastructure.adapter.in.web;
+package com.elson.wallet.infra.adapter.in.web;
 
 import com.elson.wallet.domain.exception.*;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
         // Extrai os erros de validação e formata uma resposta clara
-        Map<String, String> errors = ...;
+        final Map<String, String> errors = ex.getBindingResult().getFieldErrors().stream()
+            .collect(java.util.stream.Collectors.toMap(
+                err -> err.getField(),
+                err -> err.getDefaultMessage(),
+                (msg1, msg2) -> msg1 // in case of duplicate keys, keep the first message
+            ));
         return new ResponseEntity<>(createErrorResponse(HttpStatus.BAD_REQUEST, "Validation Error", errors), HttpStatus.BAD_REQUEST);
     }
     

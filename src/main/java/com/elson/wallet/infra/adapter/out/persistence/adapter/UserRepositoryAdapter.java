@@ -1,12 +1,12 @@
-package com.elson.wallet.infrastructure.adapter.out.persistence.adapter;
+package com.elson.wallet.infra.adapter.out.persistence.adapter;
 
 import com.elson.wallet.application.port.out.UserRepositoryPort;
 import com.elson.wallet.domain.model.User;
-import com.elson.wallet.infrastructure.adapter.out.persistence.entity.UserEntity;
-import com.elson.wallet.infrastructure.adapter.out.persistence.entity.WalletEntity;
-import com.elson.wallet.infrastructure.adapter.out.persistence.mapper.UserMapper;
-import com.elson.wallet.infrastructure.adapter.out.persistence.mapper.WalletMapper;
-import com.elson.wallet.infrastructure.adapter.out.persistence.repository.UserJpaRepository;
+import com.elson.wallet.infra.adapter.out.persistence.entity.UserEntity;
+import com.elson.wallet.infra.adapter.out.persistence.entity.WalletEntity;
+import com.elson.wallet.infra.adapter.out.persistence.mapper.UserMapper;
+import com.elson.wallet.infra.adapter.out.persistence.mapper.WalletMapper;
+import com.elson.wallet.infra.adapter.out.persistence.repository.UserJpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

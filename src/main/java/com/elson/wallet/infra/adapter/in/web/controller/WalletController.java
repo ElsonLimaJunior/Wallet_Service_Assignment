@@ -1,11 +1,11 @@
-package com.elson.wallet.infrastructure.adapter.in.web.controller;
+package com.elson.wallet.infra.adapter.in.web.controller;
 
 import com.elson.wallet.application.port.in.GetBalanceUseCase;
 import com.elson.wallet.application.port.in.WalletOperationUseCase;
 import com.elson.wallet.application.port.out.WalletRepositoryPort;
 import com.elson.wallet.domain.model.Wallet;
-import com.elson.wallet.infrastructure.adapter.in.web.dto.BalanceResponseDto;
-import com.elson.wallet.infrastructure.adapter.in.web.dto.DepositRequestDto;
+import com.elson.wallet.infra.adapter.in.web.dto.BalanceResponseDto;
+import com.elson.wallet.infra.adapter.in.web.dto.DepositRequestDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

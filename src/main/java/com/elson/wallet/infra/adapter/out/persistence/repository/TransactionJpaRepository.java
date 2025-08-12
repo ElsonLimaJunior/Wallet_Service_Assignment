@@ -1,6 +1,6 @@
-package com.elson.wallet.infrastructure.adapter.out.persistence.repository;
+package com.elson.wallet.infra.adapter.out.persistence.repository;
 
-import com.elson.wallet.infrastructure.adapter.out.persistence.entity.TransactionEntity;
+import com.elson.wallet.infra.adapter.out.persistence.entity.TransactionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

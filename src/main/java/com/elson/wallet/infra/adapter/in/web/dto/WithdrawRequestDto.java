@@ -1,4 +1,4 @@
-package com.elson.wallet.infrastructure.adapter.in.web.dto;
+package com.elson.wallet.infra.adapter.in.web.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

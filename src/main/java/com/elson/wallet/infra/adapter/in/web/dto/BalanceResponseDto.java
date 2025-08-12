@@ -1,4 +1,4 @@
-package com.elson.wallet.infrastructure.adapter.in.web.dto;
+package com.elson.wallet.infra.adapter.in.web.dto;
 
 import java.math.BigDecimal;
 

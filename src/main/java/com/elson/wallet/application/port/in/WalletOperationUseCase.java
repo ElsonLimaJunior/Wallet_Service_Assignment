@@ -8,8 +8,6 @@ public interface WalletOperationUseCase {
     void withdraw(UUID walletId, BigDecimal amount);
     void transfer(TransferCommand command);
 
-    // Usamos um objeto "Command" para agrupar os parâmetros de uma transferência
-    // Isso torna o código mais limpo e fácil de estender
     final class TransferCommand {
         private final UUID sourceWalletId;
         private final UUID destinationWalletId;

@@ -10,13 +10,14 @@ public final class Transaction {
     private final UUID id;
     private final UUID walletId;
     private final TransactionType type;
-    private final BigDecimal amount; // Always use BigDecimal for monetary values
+    private final BigDecimal amount; 
     private final Instant timestamp;
-    private final UUID correlationId; // Used to link TRANSFER_OUT and TRANSFER_IN
+    private final UUID correlationId; 
 
     public Transaction(UUID id, UUID walletId, TransactionType type, BigDecimal amount, Instant timestamp, UUID correlationId) {
-        // Here we would add validation logic (e.g., amount must be positive)
-        // For now, we keep it simple.
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Amount must be positive and not null");
+        }
         this.id = id;
         this.walletId = walletId;
         this.type = type;
@@ -25,7 +26,6 @@ public final class Transaction {
         this.correlationId = correlationId;
     }
 
-    // Getters only to enforce immutability
     public UUID getId() {
         return id;
     }

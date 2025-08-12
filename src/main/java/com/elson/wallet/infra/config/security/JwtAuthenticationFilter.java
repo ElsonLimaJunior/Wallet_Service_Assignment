@@ -1,4 +1,4 @@
-package com.elson.wallet.infrastructure.config.security;
+package com.elson.wallet.infra.config.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

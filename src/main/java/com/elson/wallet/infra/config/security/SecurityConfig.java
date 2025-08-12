@@ -1,6 +1,6 @@
-package com.elson.wallet.infrastructure.config.security;
+package com.elson.wallet.infra.config.security;
 
-import com.elson.wallet.infrastructure.adapter.out.persistence.repository.UserJpaRepository;
+import com.elson.wallet.infra.adapter.out.persistence.repository.UserJpaRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

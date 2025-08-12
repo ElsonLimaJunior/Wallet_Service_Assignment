@@ -1,9 +1,10 @@
-package com.elson.wallet.infrastructure.adapter.out.persistence.repository;
+package com.elson.wallet.infra.adapter.out.persistence.repository;
 
-import com.elson.wallet.infrastructure.adapter.out.persistence.entity.WalletEntity;
+import com.elson.wallet.infra.adapter.out.persistence.entity.WalletEntity;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 import java.util.UUID;
 

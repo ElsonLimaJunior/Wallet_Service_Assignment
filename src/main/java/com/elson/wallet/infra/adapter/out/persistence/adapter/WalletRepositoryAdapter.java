@@ -1,10 +1,10 @@
-package com.elson.wallet.infrastructure.adapter.out.persistence.adapter;
+package com.elson.wallet.infra.adapter.out.persistence.adapter;
 
 import com.elson.wallet.application.port.out.WalletRepositoryPort;
 import com.elson.wallet.domain.model.Wallet;
-import com.elson.wallet.infrastructure.adapter.out.persistence.entity.WalletEntity;
-import com.elson.wallet.infrastructure.adapter.out.persistence.mapper.WalletMapper;
-import com.elson.wallet.infrastructure.adapter.out.persistence.repository.WalletJpaRepository;
+import com.elson.wallet.infra.adapter.out.persistence.entity.WalletEntity;
+import com.elson.wallet.infra.adapter.out.persistence.mapper.WalletMapper;
+import com.elson.wallet.infra.adapter.out.persistence.repository.WalletJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -39,7 +39,6 @@ public class WalletRepositoryAdapter implements WalletRepositoryPort {
         return entityOptional.map(walletMapper::toDomain);
     }
 
-    @Override
     public Optional<Wallet> findByIdWithLock(UUID walletId) {
         // Chama o método com lock pessimista definido no JpaRepository.
         Optional<WalletEntity> entityOptional = walletJpaRepository.findByIdWithLock(walletId);

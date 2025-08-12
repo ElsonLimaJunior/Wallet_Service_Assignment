@@ -7,5 +7,4 @@ import java.util.UUID;
 public interface WalletRepositoryPort {
     Optional<Wallet> findById(UUID walletId);
     Optional<Wallet> findByUserId(UUID userId);
-    // Em um sistema real, poderíamos ter um método `lockById(UUID walletId)` para o lock pessimista
 }

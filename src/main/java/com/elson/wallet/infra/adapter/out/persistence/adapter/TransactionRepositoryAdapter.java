@@ -1,10 +1,11 @@
-package com.elson.wallet.infrastructure.adapter.out.persistence.adapter;
+package com.elson.wallet.infra.adapter.out.persistence.adapter;
 
 import com.elson.wallet.application.port.out.TransactionRepositoryPort;
 import com.elson.wallet.domain.model.Transaction;
-import com.elson.wallet.infrastructure.adapter.out.persistence.entity.TransactionEntity;
-import com.elson.wallet.infrastructure.adapter.out.persistence.mapper.TransactionMapper;
-import com.elson.wallet.infrastructure.adapter.out.persistence.repository.TransactionJpaRepository;
+import com.elson.wallet.infra.adapter.out.persistence.entity.TransactionEntity;
+import com.elson.wallet.infra.adapter.out.persistence.mapper.TransactionMapper;
+import com.elson.wallet.infra.adapter.out.persistence.repository.TransactionJpaRepository;
+import com.elson.wallet.infra.adapter.out.persistence.entity.WalletEntity;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -23,7 +24,9 @@ public class TransactionRepositoryAdapter implements TransactionRepositoryPort {
 
     @Override
     public Transaction save(Transaction transaction) {
-        TransactionEntity entity = mapper.toEntity(transaction);
+
+        WalletEntity walletEntity = /* obtain WalletEntity using transaction.getWalletId() */ null;
+        TransactionEntity entity = mapper.toEntity(transaction, walletEntity);
         TransactionEntity savedEntity = jpaRepository.save(entity);
         return mapper.toDomain(savedEntity);
     }

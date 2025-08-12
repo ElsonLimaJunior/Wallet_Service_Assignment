@@ -1,4 +1,4 @@
-package com.elson.wallet.infrastructure.adapter.out.persistence.entity;
+package com.elson.wallet.infra.adapter.out.persistence.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
